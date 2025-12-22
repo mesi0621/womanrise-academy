@@ -1,0 +1,50 @@
++ Actors 
+
+Student / Learner
+
+Enrolls in courses
+
+Accesses lessons, quizzes, and assignments
+
+Tracks progress and grades
+
+Interacts in forums or discussions
+
+Instructor / Teacher
+
+Creates and manages courses
+
+Uploads content (videos, PDFs, exercises)
+
+Creates quizzes, assignments, and exams
+
+Reviews student submissions and grades
+
+Admin / System Administrator
+
+Manages user accounts (students, instructors)
+
+Manages platform content
+
+Handles reporting and analytics
+
+Manages payments, subscriptions, and permissions
+Payment Gateway
+
+Handles course payments and subscriptions
+
+Confirms transaction success/failure
+
+Email / Notification Service
+
+Sends notifications to students and instructors
+
+Sends reminders for assignments, exams, or events
+
+External Content Provider (Optional)
+
+Supplies additional learning resources (e.g., e-books, videos)
+
+Learning Management System (LMS) Integration (Optional)
+
+Allows importing/exporting courses or grades between systems
