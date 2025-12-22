@@ -1,0 +1,724 @@
+2. OVERALL DESCRIPTION
+2.1 Product Perspective 
+The E-learning platform is a web-based Learning Management System (LMS) designed to deliver digital education to global users.
+It functions as:
+A standalone platform, hosted on cloud services (AWS).
+A centralized educational environment that stores courses, lessons, quizzes, progress data, certificates, and user profiles.
+A system that may integrate with external services, such as:
+oPayment gateways (e.g., Stripe)
+oVideo streaming services (HLS/DASH)
+oSocial logins (Google/Facebook)
+oTransactional email services (SendGrid/SES)
+System Interfaces
+Database: PostgreSQL or similar database storing users, courses, enrollments, scores.
+Front-end: Responsive web interface (React/Angular).
+Media storage: Cloud-based storage (AWS S3).
+Video Processing: FFmpeg or AWS MediaConvert.
+Summary
+Overall, the platform acts as a complete digital education ecosystem, integrating course creation, delivery, assessment, progress tracking, e-commerce, and communication.
+
+
+
+2.2 Product Features / Product Functions (Merged)
+1. User Authentication & Profiles (Login, Registration, Identity Management)
+A secure user management system enabling smooth onboarding and identity verification.
+Key Functionalities:
+Email-based registration with server-side validation, hashed passwords, and confirmation emails.
+Social login (OAuth 2.0) using Google/Facebook to simplify registration.
+Role-Based Access Control (RBAC) ensures Students, Instructors, and Admins have different permissions.
+Profile management including biography, profile photo, professional credentials, and skills.
+Session management that auto-logs out inactive users for security.
+Password recovery via secure, time-limited reset links.
+Why this matters (from SRS)
+It ensures strong security, compliance with GDPR, and a seamless user experience.
+
+2. Course Catalog & Search
+Allows learners to discover, explore, and filter thousands of courses.
+Features:
+Full-text search across titles, descriptions, instructor names.
+Advanced filtering — category, difficulty level, price, popularity, duration.
+Multi-level taxonomy for organized browsing (e.g., Programming → Web → Frontend).
+Personalized recommendations (powered by AI—see Adaptive Learning).
+User-friendly course previews with ratings, reviews, and introductory videos.
+SRS Basis:
+Both documents emphasize course catalog usability, responsiveness, and search performance (<1 sec).
+
+3. Instructor Course Creation Tools
+A powerful creation suite so instructors can produce high-quality courses.
+Capabilities:
+Create structured modules, lessons, sections.
+Upload multiple content formats:
+oPDF, DOCX, PPT, ZIP
+oHD video
+oAudio files
+oInteractive HTML packages
+Rich text editor for lesson content.
+Question bank: MCQ, True/False, short answer, coding assignments.
+Bulk upload of videos and documents.
+Publish/unpublish control to manage availability.
+From SRS:
+Reflects the comprehensive CMS/LMS features described in both documents.
+
+4. Content Delivery (Video, PDFs, Interactive Lessons)
+Ensures smooth, accessible, and high-quality learning experiences.
+Systems Used:
+Adaptive video streaming (HLS/DASH).
+Supports offline downloads for low-connectivity scenarios.
+Mobile-first responsive interface.
+Interactive content such as drag-and-drop quizzes, simulations, and animations.
+Video transcripts, subtitles, and audio descriptions (Accessibility requirement).
+Performance Notes (from SRS):
+Time to first video byte: <2 seconds.
+Supports thousands of concurrent streams.
+
+5. Assessments & Auto-Grading
+A complete testing and evaluation system.
+Includes:
+Timed quizzes and exams.
+Auto-grading for:
+oMCQ
+oTrue/False
+oFill-in-the-blank
+oMatching
+Manual grading tools for essay-type answers.
+Rules for randomizing questions and answers.
+Proctored exam options (see section below).
+Secure browser mode to prevent cheating.
+Why Needed:
+Ensures accuracy, fairness, and scalability in evaluating thousands of learners.
+
+6. Progress Tracking & Dashboards
+Provides real-time learning analytics.
+Student Dashboard:
+Courses enrolled
+Percent completion
+Quiz scores
+Time spent per session
+Recommended next lessons
+Instructor Dashboard:
+Learner performance analytics
+Drop-off patterns
+Engagement heatmaps
+Assignment submission statistics
+Admin Dashboard:
+Platform-wide analytics
+Revenue reports
+User behavior metrics
+System health and load charts
+SRS Basis:
+Both documents emphasize strong reporting and progress tracking.
+
+7. Certificates & Credential Verification
+Recognizes accomplishments with secure validation.
+Certificate Features:
+Auto-generated PDFs with:
+oStudent name
+oCourse name
+oCompletion date
+oInstructor signature
+oUnique verification ID
+Blockchain-based verification (optional advanced feature).
+Skill badge system (e.g., “Python Beginner Badge”).
+Purpose:
+Enhances employability and trustworthiness of credentials.
+
+8. Payments & E-Commerce
+Handles monetization and course purchases.
+Features:
+Integration with Stripe or local payment methods.
+Supports:
+oOne-time payments
+oSubscriptions
+oCoupons and discounts
+Automated invoice delivery.
+Refund and cancellation workflow.
+Secure payment (PCI-DSS compliant).
+SRS Basis:
+The second document detailed Stripe integration and PCI compliance.
+
+9. Communication Tools (Forums, Messaging)
+Increases engagement and collaboration.
+Communication Modules:
+Course-specific discussion forums
+Peer Q&A sections
+Instructor announcements
+Private messaging between students and instructors
+Push notifications for deadlines
+Email notifications (SendGrid/SES)
+What This Supports:
+A community-driven learning environment.
+
+10. Accessibility Tools
+Ensures the platform is usable by all learners.
+Compliance with WCAG 2.1 AA:
+Keyboard navigability
+High-contrast mode
+Screen-reader compatibility
+Captions and transcripts for all videos
+Adjustable font sizes
+Color-blind friendly palette
+Required by:
+Educational regulations, ethical inclusivity, and SRS guidelines.
+
+11. Security Controls
+Ensures data protection and system integrity.
+Security Measures:
+Bcrypt password hashing
+TLS/SSL encryption
+RBAC for all operations
+CSRF protection
+XSS filtering
+Input validation
+Signed URLs for video downloads
+Audit logging for every admin/instructor action
+DDoS protection and rate limiting
+IP-based fraud detection (optional)
+Regulatory Compliance:
+GDPR
+CCPA
+FERPA (if used in schools)
+
+12. Localization & Multi-Language Support
+Makes the platform accessible worldwide.
+Features:
+Full UI language translation
+Localized date/time formats
+Local currency support
+Regional course recommendations
+Multi-script support (Latin, Ge’ez, etc.)
+Languages for Ethiopia:
+Amharic
+Afaan Oromo
+Tigrinya
+English
+
+13. Adaptive Learning System (AI-Driven)
+A modern AI-powered engine that adjusts learning to each user.
+Core Features:
+1. Personalized Learning Paths
+The system analyzes user behavior, quiz performance, and skill level to recommend the next best learning module.
+2. AI-Powered Course Recommendations
+Similar to YouTube/Netflix recommendation engines:
+“Courses you may like”
+“Continue from where you left off”
+“Recommended for your career path”
+3. Skill Gap Analysis
+The platform evaluates:
+Quiz scores
+Assignment quality
+Course engagement
+Then identifies skills the learner lacks and recommends material.
+4. Predictive Analytics
+The AI predicts:
+Likelihood of dropping a course
+Topics causing confusion
+Optimal pace of learning
+This increases retention significantly.
+
+14. Multi-Modal Content Delivery
+Supports a variety of learning formats.
+Modes:
+Adaptive video streaming (auto adjusts quality).
+Audio-only lessons (helpful for low data environments).
+Auto-generated transcripts.
+Interactive simulations and gamified modules.
+Offline-first content enabling learning without internet.
+Why Needed:
+Modern learners prefer flexibility.
+
+15. Advanced Assessment & Certification
+A professional examination system.
+Features:
+Automated grading for objective questions.
+AI-assisted grading for written answers.
+Proctored Exams:
+oWebcam monitoring
+oScreen locking
+oIdentity verification
+Blockchain-verified Certificates
+Skill Badges: Micro-credentials for short modules.
+
+16. Collaboration & Community Features
+Encourages social learning.
+Includes:
+Virtual classrooms (Zoom, Teams, or custom).
+Discussion forums (course-based).
+Peer study groups.
+Peer-to-peer mentoring or tutor request system.
+Gamified challenges and leaderboards.
+
+17. Administration & Analytics
+For organizations using LMS at scale.
+Institutional Features:
+Create and manage departments
+Assign instructors to groups
+Organization-level reporting
+Analytics Tools:
+Detailed dashboards showing:
+oCourse health
+oStudent progress
+oRevenue trends
+oEngagement analytics
+oDropout prediction
+Content Moderation:
+Admins can:
+oApprove courses
+oRemove inappropriate content
+oReview user reports
+oMonitor discussions and messages
+Revenue Management:
+Track payments and income
+Instructor payouts
+Financial reports
+Tax calculation support
+
+18. Ethiopia-Specific Features
+Designed to meet local challenges and accessibility needs.
+1. Multi-Language Support
+Amharic
+Afaan Oromo
+Tigrinya
+English
+2. USSD/SMS Learning Access
+For students without smartphones
+View progress
+Receive quiz reminders
+Enrollment confirmation via SMS
+Basic lessons via USSD text-based navigation
+3. Offline-First Architecture
+Since internet connection is inconsistent for many learners:
+Lessons can be downloaded
+Offline quizzes
+Syncs progress when online
+4. Local Payment Integration
+Supports:
+Telebirr
+CBE Birr
+HelloCash
+MPESA Ethiopia
+Bank transfer
+
+
+
+2.3 User Classes and Characteristics — Detailed Explanation (Merged)
+The E-Learning Platform serves multiple categories of users, each with unique needs, behaviors, and technical capabilities. Understanding these user classes ensures the system is designed to support their goals effectively while maintaining security, scalability, and usability.
+
+1. Students (Learners)
+Students are the primary consumers of the learning material. They represent the largest user group and exhibit diverse skill levels, devices, and learning goals.
+Technical Characteristics:
+Usually low to medium technical skills.
+Many rely on mobile devices, feature phones, or low-end smartphones.
+Bandwidth may be unstable, especially in developing regions (e.g., Ethiopia).
+Behavioral Characteristics:
+Prefer simple, intuitive navigation.
+Engage in shorter, bite-sized learning sessions.
+Need motivation and reminders to complete lessons.
+Primary Goals:
+Access and consume course content (videos, PDFs, quizzes).
+Track progress and performance.
+Earn certificates or badges.
+Improve knowledge or prepare for exams/careers.
+Functional Needs:
+Easy onboarding and login experience.
+Personalized learning paths and recommendations.
+Offline learning capabilities.
+Community support (forums, peer help).
+Accessible tools (captions, transcripts, multi-language).
+Typical Challenges:
+Limited digital literacy.
+Low bandwidth/inconsistent internet.
+Dependence on mobile-only interfaces.
+
+2. Instructors (Content Creators / Educators)
+Instructors are experts who create, upload, and manage courses. Their focus is publishing high-quality content and analyzing student performance.
+Technical Characteristics:
+Medium to high technical proficiency, especially in digital tools.
+Comfortable with content creation technologies (video editing, slides, quizzes).
+Behavioral Characteristics:
+Expect feature-rich control panels and analytics.
+Need tools to engage large numbers of students.
+Desire detailed feedback on learner behavior.
+Primary Goals:
+Create, organize, and publish courses efficiently.
+Communicate with learners and answer questions.
+Track student progress and performance.
+Monetize content through course enrollments.
+Build reputation through ratings and feedback.
+Functional Needs:
+Course Creation Suite (upload videos, structure modules).
+Question bank and quiz builder.
+Dashboard with analytics (engagement, retention, drop-off points).
+Financial dashboard for payouts and revenue insights.
+Content moderation tools.
+Messaging, announcements, and live session integration.
+Typical Challenges:
+Handling large amounts of content.
+Keeping students engaged and reducing dropout rates.
+Monitoring learning progress in real-time.
+
+3. Administrators (Platform Managers / System Operators)
+Admins are responsible for the overall management, maintenance, and security of the entire platform. They possess the highest authority and technical capability.
+Technical Characteristics:
+High to expert-level technical knowledge of systems, databases, and security.
+Familiar with backend management, system monitoring tools, and moderation workflows.
+Roles & Responsibilities:
+🔹 1. User Management & Moderation
+Approve or block users (students, instructors).
+Manage user roles and permissions (RBAC).
+Review reported content or users.
+🔹 2. Course Approval & Quality Assurance
+Review and approve instructor-uploaded courses.
+Ensure content meets quality and policy standards.
+Verify copyright and prevent plagiarism.
+🔹 3. System Monitoring & Maintenance
+Monitor server health, performance, storage usage.
+Manage backups, system updates, and load balancing.
+Ensure video encoding and streaming services are operational.
+🔹 4. Security Enforcement
+Oversee audit logs for suspicious behavior.
+Configure access controls, encryption policies, and API security.
+Protect against attacks (XSS, CSRF, SQL injection, DDoS).
+Primary Goals:
+Ensure smooth operation and performance.
+Uphold platform security and data integrity.
+Maintain educational and community standards.
+Support instructors and institutions.
+Typical Challenges:
+Scaling the system for thousands of users.
+Maintaining high uptime and quick issue resolution.
+Ensuring compliance with laws (GDPR, data privacy).
+
+🔍 Summary Table
+User Class	Skills	Devices	Goals	Needs
+Students	Low–Medium	Mobile-first	Learn, complete courses, earn certificates	Simple UI, offline access, personalized paths
+Instructors	Medium–High	Laptop/Tablets	Publish courses, earn income	Creation tools, analytics, communication tools
+Admins	High/Expert	Desktop/Laptop	Maintain system, ensure security	Moderation controls, logs, dashboards, monitoring tools
+2.4 General Constraints 
+This section outlines mandatory restrictions that influence the system design, architecture, and implementation. These constraints originate from user needs, deployment environment, infrastructure decisions, industry standards, and legal requirements as seen in both uploaded SRS documents.
+
+A. Technical Constraints
+1. Browser Compatibility
+The platform must function smoothly on up-to-date versions of:
+Google Chrome
+Mozilla Firefox
+Safari
+Microsoft Edge
+Reason:
+Most students and instructors access LMS platforms through browsers, and these four represent >90% market share. The two SRS documents emphasize multi-browser support for accessibility and usability.
+
+2. Fully Responsive User Interface
+The system must adapt to various screen sizes, including:
+Smartphones
+Tablets
+Desktops
+Laptops
+Reason:
+Users (especially in Ethiopia and developing regions) primarily access through mobile devices. Responsiveness ensures usability across all screen sizes.
+
+3. PostgreSQL as the Required Database
+The database must use PostgreSQL, chosen for:
+High reliability
+Transaction safety
+ACID compliance
+JSON support
+Scalability
+This matches the database requirements outlined in both SRS files.
+
+4. AWS Cloud Hosting
+The platform must be hosted on:
+AWS S3 → for video/doc storage
+AWS RDS (PostgreSQL) → for database
+AWS CloudFront → for CDN-based content delivery
+Reason:
+Both SRS documents mention cloud hosting and CDNs for speed, scalability, and reliability.
+
+5. Adaptive Video Streaming Requirement
+Video delivery must use:
+HLS (HTTP Live Streaming) or
+MPEG-DASH
+Reason:
+Adaptive bitrate streaming ensures smooth playback even with unstable internet, which is common in Ethiopia and many developing areas.
+
+B. Security Constraints
+1. TLS/SSL Encryption
+All data transmission must use:
+HTTPS (TLS 1.2 or higher)
+Ensures protection from MITM attacks.
+
+2. Bcrypt Password Hashing
+User passwords must be stored using:
+bcrypt hashing with salting
+Reason:
+Both documents emphasize high-level security for user credentials.
+
+3. RBAC (Role-Based Access Control)
+Every backend endpoint must have role-based permission checks for:
+Students
+Instructors
+Admins
+Ensures that unauthorized users cannot access restricted functions.
+
+4. OWASP Top 10 Compliance
+The system must address the following security risks:
+SQL Injection
+XSS
+CSRF
+Authentication flaws
+Broken access control
+Sensitive data exposure
+Both documents emphasize secure coding and global standards.
+
+C. Performance Constraints
+1. 5,000–10,000 Concurrent Users
+The system must remain stable under high load, meaning:
+Efficient caching
+Load balancing
+Optimized queries
+
+2. Page Load Time Under 3 Seconds (p95)
+95% of pages must load within 3 seconds even during peak times.
+Improves user experience and prevents system drop-offs.
+
+3. Video Latency < 2 Seconds
+Videos must start playing within two seconds for a smooth learning experience.
+
+4. Search Results Under 1 Second
+Search functionality must be optimized using:
+Indexing
+Caching
+Full-text search
+
+D. Regulatory Constraints
+1. Data Privacy Compliance
+The platform must adhere to:
+GDPR (European)
+CCPA (California)
+This affects:
+Data storage
+Data access
+Data deletion
+Consent for cookies
+User profile management
+
+2. PII Deletion Within 30 Days
+All Personally Identifiable Information (PII) must be permanently deleted within 30 days after a user requests account removal.
+
+📘 2.5 User Documentation — Detailed Explanation 
+The system must provide complete documentation sets for all user roles to ensure smooth operation, learning, and administration.
+
+A. Student Documentation
+1. FAQs
+Answers to commonly asked questions regarding:
+Account creation
+Enrollment
+Certificates
+2. Troubleshooting Guides
+Step-by-step solutions to:
+Video playback issues
+Login errors
+Payment problems
+3. Payment & Enrollment Help
+Includes:
+How to buy a course
+Local payment methods (Telebirr, CBE Birr, etc.)
+Refund instructions
+4. Navigation Tutorials
+Helps new learners understand:
+Course pages
+Progress dashboard
+Assignment submission
+
+B. Instructor Documentation
+1. Course Creation Manuals
+Covers how to:
+Create modules
+Upload videos/PDFs
+Add quizzes
+2. Content Upload Guidelines
+Includes rules for:
+Video formats
+Audio quality
+Document size limits
+3. Assessment Creation Tutorials
+Explains:
+Question types
+Grading rules
+Proctored exams
+4. Revenue & Analytics Dashboards
+Shows instructors how to:
+Track earnings
+Analyze student performance
+Manage payouts
+
+C. Administrator Manual
+1. Deployment & Configuration
+Instructions for:
+Server setup
+Environment variables
+Cloud configuration
+2. Backup & Recovery
+Covers:
+Daily/automatic backups
+Disaster recovery
+Data restoration
+3. Log Management & Security Auditing
+Teaches admins how to:
+Monitor logs
+Detect suspicious activity
+Track system health
+4. User Moderation Guidelines
+Procedures for:
+Approving instructors
+Blocking/reporting users
+Removing abusive content
+
+📘 2.6 Assumptions and Dependencies — Detailed Explanation 
+
+A. Assumptions
+1. Users Have Stable Internet
+While offline mode is supported, many features (video streaming, live classes) require active internet.
+2. Instructors Provide High-Quality Videos
+Videos must be:
+Pre-encoded
+HD quality
+Compressed
+Properly formatted
+3. Cloud Platform (AWS) Is Reliable
+Assumes AWS uptime of 99.99% for:
+Database
+CDN
+File storage
+4. Users Have Modern Browsers
+Features like adaptive streaming require updated browsers.
+
+B. Dependencies
+1. Stripe for Payments
+Used for:
+Course purchases
+Subscription plans
+Refunds
+2. SendGrid/SES for Email
+Used for:
+Password resets
+Enrollment notifications
+Certificates
+Payment receipts
+3. Cloud Storage
+Stores:
+Videos
+Documents
+Images
+Certificates
+4. Social Login Providers
+Login integration depends on:
+Google OAuth
+Facebook OAuth
+5. HLS/DASH Adaptive Streaming
+Video playback depends on:
+CDNs
+Transcoding tools
+HLS/DASH support
+
+📘 4. External Interface Requirements — Detailed Explanation
+
+4.1 User Interfaces — Detailed Explanation
+A. Design Requirements
+1. Material Design or Similar Standard
+Ensures:
+Consistent UI components
+Predictable interactions
+User familiarity
+2. Clean, Simple, Mobile-First UI
+Prioritized because:
+Many users are mobile-only
+Simplifies navigation
+3. Clear Navigation Bar
+Appears on all major pages:
+Home
+My Courses
+Profile
+Search
+4. Consistent Typography & Colors
+Ensures:
+Brand identity
+Visual readability
+Accessibility
+
+B. User Experience Requirements
+1. Clear Instructions & Error Messages
+Users must understand:
+Why an action failed
+How to correct it
+2. Banner-Style Notifications
+Non-intrusive alerts improve learner focus.
+3. WCAG 2.1 AA Accessibility Compliance
+Required for:
+Screen readers
+High-contrast mode
+Keyboard navigation
+4. Responsive Design
+All pages must resize correctly.
+
+4.2 Hardware Interfaces — Detailed Explanation
+A. Client Devices
+Supports:
+Desktops
+Laptops
+Tablets
+Smartphones
+B. Device Integrations
+The system must integrate with:
+Cameras (for proctored exams)
+Microphones (for live classes)
+Printers (receipts/certificates)
+C. Cloud Infrastructure
+AWS-dependent:
+S3 → files
+RDS → database
+
+4.3 Software Interfaces — Detailed Explanation
+1. Authentication Interfaces
+Uses:
+OAuth 2.0 for social logins
+JWT tokens for sessions
+2. Payment Interfaces
+Stripe API ensures:
+PCI-DSS compliance
+Secure transactions
+3. Database Interfaces
+PostgreSQL accessed via:
+Encrypted connections (TLS)
+Connection pooling
+4. Analytics Interfaces
+Supports:
+Exports to BI tools
+Dashboards
+5. Video Processing
+Uses:
+FFmpeg / AWS MediaConvert
+For:
+Transcoding
+Compression
+Thumbnail generation
+
+4.4 Communication Interfaces — Detailed Explanation
+1. Protocol Requirements
+HTTPS (TLS 1.2+) mandatory
+Optional WebSockets for real-time chat and live updates
+2. Email Communication
+SendGrid/SES used for:
+Account creation
+Enrollment
+Password reset
+Marketing
+3. Push Notifications
+Used for:
+Deadlines
+Course reminders
+New content
+4. Video Streaming
+HLS/DASH required for:
+Multi-quality playback
+Low-buffer streaming
+Mobile optimization
+
