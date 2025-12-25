@@ -29,7 +29,7 @@ WomanRise E-Learning Academy is a web-based e-learning platform developed by a t
 | No | Name | Student ID | GitHub Username |
 1. Meseret Mezgebu| 1349/16 | messi0621
 2. Elsabet Admasu |0658/16|  elsadmasu-code
-3. Rehima Ali    |1619/16|
+3. Rehima Ali    |1619/16|rehima123
 
 
 ## Course Information
