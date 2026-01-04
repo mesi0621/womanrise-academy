@@ -31,6 +31,7 @@ eduplatform Academy is a web-based e-learning platform developed by a team of wo
 1. Meseret Mezgebu| 1349/16 | mesi0621
 3. Elsabet Admasu |0658/16|  elsadmasu-code
 4. Rehima Ali    |1619/16|rehima123
+5. Meron Hassen
 
 
 ## Course Information
